@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://segmentfault.com/a/1190000010580797 -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"><meta name="renderer" content="webkit"><meta property="qc:admins" content="15317273575564615446375"><meta property="og:image" content="https://static.segmentfault.com/v-5db16590/global/img/touch-icon.png"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="alexaVerifyID" content="LkzCRJ7rPEUwt6fVey2vhxiw1vQ"><meta name="apple-itunes-app" content="app-id=958101793, app-argument="><title>如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否</title><meta name="description" content="在 ./app/javascript/packs/ 中建立 vue component hello_turbolinks.vue"><meta name="keywords" content="turbolinks,vue.js,ruby-on-rails"><link rel="search" type="application/opensearchdescription+xml" href="https://segmentfault.com/opensearch.xml" title="SegmentFault"><link rel="shortcut icon" href="https://static.segmentfault.com/v-5db16590/global/img/favicon.ico"><link rel="apple-touch-icon" href="https://static.segmentfault.com/v-5db16590/global/img/touch-icon.png"><meta name="msapplication-TileColor" content="#009a61"><meta name="msapplication-square150x150logo" content="https://static.segmentfault.com/v-5db16590/global/img/touch-icon.png"><meta name="baidu_union_verify" content="bcf7fd80dca60d53d46d5b46e1b990ca"><link rel="alternate" type="application/atom+xml" title="SegmentFault 最新问题" href="https://segmentfault.com/feeds/questions"><link rel="alternate" type="application/atom+xml" title="SegmentFault 最新文章" href="https://segmentfault.com/feeds/blogs"><link rel="stylesheet" href="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/global.css"><link rel="stylesheet" href="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/blog.css"><link rel="stylesheet" href="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/responsive.css"><script src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/hm.js"></script><script async="" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/analytics.js"></script><script src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/osd.js"></script><script src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/f(4).txt" id="google_shimpl"></script><script type="text/javascript" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/spcjs.php"></script><script type="text/javascript" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/spc.php"></script><script type="text/javascript" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/fl.js"></script>
+<script async="" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/f(5).txt"></script><script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6330872677300335",
+            enable_page_level_ads: true
+        });
+    </script><script charset="utf-8" id="ParadigmSDK" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/ParadigmSDK_v2.js" data="216" defsi="594"></script><link rel="preload" href="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/f(6).txt" as="script"><script type="text/javascript" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/f(6).txt"></script><link rel="preload" href="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/f(4).txt" as="script"><script>
+    ParadigmSDK.init("46e957bd9dea4acdaa15b4b64aff728f");
+    ParadigmSDK.trackDetailPageShow();
+</script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="https://static.segmentfault.com/v-5db16590/3rd/highlightjs/highlight.pack.js" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/highlight.pack.js"></script></head><!-- 推荐引擎 --><body data-mod="blog" class="blog-post "><!--[if lt IE 9]><div class="alert alert-danger topframe" role="alert">你的浏览器实在<strong>太太太太太太旧了</strong>，放学别走，升级完浏览器再说 <a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div><![endif]--><img id="icon4weChat" style="height: 0;width: 0;" data-src="https://static.segmentfault.com/v-5db16590/global/img/touch-icon-512.png"><div id="gridMapHoverBox" style="position:absolute; border: 1px solid #009a61; z-index:99; font-size: 10px; background:#fff"></div><div class="global-nav sf-header sf-header--index"><div class="bottom-nav visible-xs visible-sm hidden"><div class="opts"><a class="opts-group " href="https://segmentfault.com/"><i class="fa fa-home" aria-hidden="true"></i><span>首页</span></a><a class="opts-group " href="https://segmentfault.com/questions"><i class="fa fa-comments" aria-hidden="true"></i><span>问答</span></a><a class="opts-group active" href="https://segmentfault.com/blogs"><i class="fa fa-pencil-square" aria-hidden="true"></i><span>专栏</span></a><a class="opts-group " href="https://segmentfault.com/lives"><i class="fa fa-play-circle" aria-hidden="true"></i><span>讲堂</span></a><div class="opts-group"><div class="btn-group dropup"><i class="fa fa-bars dropdown hoverDropdown" data-toggle="dropdown" aria-hidden="true"><span>更多</span></i><ul class="dropdown-menu"><li><a href="https://segmentfault.com/jobs">职位</a></li><li><a href="https://segmentfault.com/events">活动</a></li><li><a href="https://segmentfault.com/tags">标签</a></li><li><a href="https://segmentfault.com/badges">徽章</a></li></ul></div></div></div></div><nav class="container nav"><div class="visible-xs visible-sm header-response"><a href="https://segmentfault.com/search" style="display:block"><i class="fa fa-search" aria-hidden="true"></i></a><div class="sf-header__logo sf-header__logo--response"><h1><a href="https://segmentfault.com/" style="height:24px; background-size: auto 24px;"></a></h1></div><a href="https://segmentfault.com/user/login" class="pull-right login-btn"><i class="fa fa-user" aria-hidden="true"></i></a></div><script>
+mobileScroll(
+    function(direction) { 
+        try {
+            if (direction === 'down') {
+                document.querySelector('.bottom-nav').classList.add('hidden')
+            } else {
+                document.querySelector('.bottom-nav').classList.remove('hidden')
+            }
+        } catch(err) {}
+    }
+);    
+function mobileScroll( fn ) {
+    var beforeScrollTop = document.documentElement.scrollTop || document.body.scrollTop,
+        fn = fn || function() {};
+    window.addEventListener("scroll", function() {
+        var afterScrollTop = document.documentElement.scrollTop || document.body.scrollTop,
+            delta = afterScrollTop - beforeScrollTop;
+        if( delta === 0 ) return false;
+        fn( delta > 0 ? "down" : "up" );
+        beforeScrollTop = afterScrollTop;
+    }, false);
+}
+</script><div class="row hidden-xs hidden-sm"><div class="col-sm-8 col-md-9 col-lg-9"><div class="sf-header__logo"><h1><a href="https://segmentfault.com/">SegmentFault</a></h1></div><div><ul class="menu list-inline pull-left hidden-xs"><li class="menu__item"><a href="https://segmentfault.com/" class="">首页</a></li><li class="menu__item"><a href="https://segmentfault.com/questions" class="">问答</a></li><li class="menu__item"><a href="https://segmentfault.com/blogs" class="active-nav">专栏</a></li><li class="menu__item"><a class=" " href="https://segmentfault.com/lives">课程</a></li><li class="menu__item"><a href="https://segmentfault.com/events" class="">活动</a></li><li class="menu__item menu__item--more dropdown"><a href="https://segmentfault.com/a/1190000010580797##" class="dropdown-toggle dropdownBtn" data-toggle="dropdown">
+                                        发现<i class="fa fa-caret-down" style="font-size: 14px;margin-left: 5px;" aria-hidden="true"></i></a><div class="dropdown-block hidden"><ul class="dropdown-content-menu"><li><a href="https://segmentfault.com/groups">圈子</a></li><li><a href="https://segmentfault.com/tags">标签</a></li><li><a href="https://segmentfault.com/groups?tab=jobs">酷工作</a></li><li><a href="https://segmentfault.com/users">排行榜</a></li><li><a href="https://segmentfault.com/badges">徽章</a></li><li><a href="https://segmentfault.com/notes">笔记</a></li><li><a href="https://docs.segmentfault.com/" target="_blank">开发手册<i style="line-height: 20px;font-size: 12px;color: #F5A623;" class="ml10 fa fa-external-link-square"></i></a></li><li><a href="https://business.segmentfault.com/ads?utm_source=sf-header" target="_blank">广告投放<i style="line-height: 20px;font-size: 12px;color: #F5A623;" class="ml10 fa fa-external-link-square"></i></a></li></ul></div></li><li class="menu__item visible-sm-inline-block"><a href="https://segmentfault.com/search"><span class="glyphicon glyphicon-search" style="vertical-align: middle;"></span></a></li></ul><form action="https://segmentfault.com/search" class="header-search  hidden-sm hidden-xs pull-right"><button class="btn btn-link"><span class="sr-only">搜索</span><span class="glyphicon glyphicon-search"></span></button><input id="searchBox" name="q" type="text" placeholder="搜索问题或关键字" class="form-control" value=""></form></div></div><div class="col-sm-4 col-md-3 col-lg-3 text-right"><ul class="opts list-inline hidden-xs"><li class="opts__item"><a href="https://segmentfault.com/user/login" class="SFRegister btn-signin" style="margin-bottom:2px;">立即登录</a><a href="https://segmentfault.com/user/register" class="SFLogin ml10 btn-signup" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;Button&#39;, &#39;Click&#39;, &#39;Login&#39;]);">免费注册</a></li></ul></div></div></nav></div><ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><ins id="aswift_0_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><iframe frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0px;width:0px;height:0px;" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/saved_resource(3).html"></iframe></ins></ins></ins>
+    
+<input id="articleId" value="1190000010580797" class="hidden">
+
+<div class="wrap" data-blogid="1200000008327314">
+
+    <div class="text-center block hidden-xs">
+        <script type="text/javascript">
+            OA_show(2);
+        </script><div style="line-height: 0; background: #FAFAFA">
+<div class="container text-center" style="position: relative;">
+<a href="https://segmentfault.com/user/login" class="small text-muted" style="position: absolute; top: 10px; right: 15px;">登录免广告</a><script async="" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/f(5).txt"></script>
+<!-- 导航下横幅广告（大型） -->
+<ins class="adsbygoogle" style="display:inline-block;width:970px;height:90px" data-ad-client="ca-pub-6330872677300335" data-ad-slot="6450634185" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:970px;background-color:transparent;"><ins id="aswift_1_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:970px;background-color:transparent;"><iframe width="970" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0px;width:970px;height:90px;" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/saved_resource(4).html"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div id="beacon_1968c5ce41" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/lg.php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div></div>
+</div>
+
+    </div>
+    
+    <div class="container mt15" style="position:relative">
+        <div class="row">
+            <div class="col-xs-12 col-md-9 main ">
+                                <ol class="breadcrumb mb15">
+                    <li><a href="https://segmentfault.com/blogs">专栏</a></li>
+                                        <li><a href="https://segmentfault.com/blog/pjchender">Ruby on Rails 學習筆記</a></li>
+                                        <li class="active">文章详情</li>
+                </ol>
+                                <div class="post-topheader custom-pjchender pt0">
+                    <div class="mb20">
+                        <div class="block-for-right-border">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                
+
+                                    <div class="post-topheader__info" data-username="PJCHENder" data-userslug="pjchender" data-useravatar="https://avatar-static.segmentfault.com/152/279/1522794362-59b0a96c9c64f_big64">
+
+
+                                        <div class="article__author clearfix">
+                                            <div class="article__authorleft">
+                                                <a href="https://segmentfault.com/u/pjchender">
+                                                    <img class="avatar-40" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/1522794362-59b0a96c9c64f_big64" alt="PJCHENder">
+                                                </a>
+                                            </div>
+                                            <div class="article__authorright">
+                                                <div class="article__authormeta">
+                                                <a href="https://segmentfault.com/u/pjchender" class="mr5"><strong>PJCHENder</strong></a>
+                                        
+                                                
+                                                                                                <img src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/rp.svg" class="mr5"><span style="color:#BF7158" class="mr10">30</span>
+
+                                                                                                发布于
+                                                <a href="https://segmentfault.com/blog/pjchender">Ruby on Rails 學習筆記</a>
+                                                
+                                                
+                                                <span class="hidden-xs">
+                                                                                                                                                          <button type="button" class="btn btn-xs btn-success follow-article ml10" data-do="follow" data-type="blog" data-id="1200000008327314">关注专栏
+                                                       </button>
+                                                                                                                                                   </span>
+                                                </div>
+                                                
+                                                <span style="display: block">
+                                                    2017-08-09 发布
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <h1 class="h1 post-topheader__info--title" id="articleTitle" data-id="1190000010580797">
+                                            <a href="https://segmentfault.com/a/1190000010580797"> 如何在 Rails 中搭配 Turbolinks 使用 Vue</a>
+                                        </h1>
+
+                                        <div class="content__tech hidden-xs">
+                                            <a href="https://segmentfault.com/a/1190000010580797" class="blog-type-common blog-type-0-before" target="_blank" data-content="
+                                                                                        翻译自 
+                                                                                        "></a>
+                                            
+                                            <ul class="taglist--inline inline-block article__title--tag mr10">
+                                                                                                    <li class="tagPopup mb5">
+                                                        <a class="tag" href="https://segmentfault.com/t/turbolinks/blogs" data-toggle="popover" data-img="" data-placement="top" data-original-title="turbolinks" data-id="1040000000351458">
+                                                                                                                      turbolinks
+                                                        </a>
+                                                    </li>
+                                                                                                    <li class="tagPopup mb5">
+                                                        <a class="tag" href="https://segmentfault.com/t/vue.js/blogs" data-toggle="popover" data-img="https://avatar-static.segmentfault.com/256/038/2560380373-565be73e6fe13_big64" data-placement="top" data-original-title="vue.js" data-id="1040000004003243">
+                                                                                                                      vue.js
+                                                        </a>
+                                                    </li>
+                                                                                                    <li class="tagPopup mb5">
+                                                        <a class="tag" href="https://segmentfault.com/t/ruby-on-rails/blogs" data-toggle="popover" data-img="https://avatar-static.segmentfault.com/283/948/2839483544-1040000000089646_big64" data-placement="top" data-original-title="ruby-on-rails" data-id="1040000000089646">
+                                                                                                                      ruby-on-rails
+                                                        </a>
+                                                    </li>
+                                                                                            </ul>
+
+                                            <span>
+                                                2.4k 次阅读
+                                                &nbsp;·&nbsp;
+                                                读完需要 18 分钟
+                                                                                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end .post-topheader -->
+
+                <div class="visible-lg">
+                    <div class="side-widget">
+                        <div class="stream__item-zan btn btn-default mt0 mb15 ml0 mr0 pt0 pb0 pl0 pr0 " id="side-widget-votes-btn">
+                            <span class="stream__item-zan-icon"></span>
+                            <span class="stream__item-zan-number" id="side-widget-votes-num">0</span>
+                        </div>
+
+                        <i class="fa fa-bookmark item " id="side-widget-bookmarks-btn"></i>
+                        <i class="fa fa-weibo item"></i>
+                        <i class="fa fa-weixin item" data-toggle="popover" data-placement="right" data-original-title="" title=""></i>
+                        <i class="fa fa-twitter item"></i>
+                        <i class="fa fa-facebook item"></i>
+                        <i class="fa fa-arrow-up item hidden"></i>
+                    </div>
+                </div>
+
+                
+                <div class="article fmt article__content" data-id="1190000010580797" data-license="cc">
+                    
+<h1 id="articleHeader0">[Rails] Vue-outlet for Turbolinks</h1>
+<p>在踩了 Rails + Turbolinks + Vue 的許多坑後，整理 <a href="https://segmentfault.com/u/andyyu0920">@andyyu0920</a> 的作法並和大家分享。</p>
+<h3 id="articleHeader1">Initialize the App</h3>
+<div class="widget-codetool" style="display: none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="# initialize the app
+rails new rails_sandbox_vue --database=postgresql --webpack=vue
+
+# install package
+bundle
+yarn" title="" data-original-title="复制"></span>
+      </div>
+      </div><pre class="shell hljs"><code class="shell"><span class="hljs-meta">#</span><span class="bash"> initialize the app</span>
+rails new rails_sandbox_vue --database=postgresql --webpack=vue
+<span class="hljs-meta">
+#</span><span class="bash"> install package</span>
+bundle
+yarn</code></pre>
+<h3 id="articleHeader2">Scaffold the app</h3>
+<div class="widget-codetool" style="display: none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="# Scaffold the app
+bin/rails g scaffold User name email
+
+# Create database and migrate
+bin/rails db:setup
+bin/rails db:migrate" title="" data-original-title="复制"></span>
+      </div>
+      </div><pre class="shell hljs"><code class="shell"><span class="hljs-meta">#</span><span class="bash"> Scaffold the app</span>
+bin/rails g scaffold User name email
+<span class="hljs-meta">
+#</span><span class="bash"> Create database and migrate</span>
+bin/rails db:setup
+bin/rails db:migrate</code></pre>
+<h3 id="articleHeader3">Create Vue Component</h3>
+<p>在 <code>./app/javascript/packs/</code> 中建立 vue component <code>hello_turbolinks.vue</code></p>
+<div class="widget-codetool" style="display: none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="&lt;!--  
+./app/javascript/packs/hello_turbolinks.vue
+--&gt;
+
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;h4&gt;{{ message }}&lt;/h4&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Object: {{ obj }} &lt;/li&gt;
+      &lt;li&gt;Number: {{ num }} &lt;/li&gt;
+      &lt;li&gt;Array: {{ arr }} &lt;/li&gt;
+      &lt;li&gt;String: {{ str }} &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  props: [&#39;obj&#39;, &#39;arr&#39;, &#39;num&#39;, &#39;str&#39;],
+  data: function () {
+    return {
+      message: &#39;Hello, Vue and Turbolinks&#39;
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+p {
+  font-size: 2em;
+  text-align: center;
+}
+&lt;/style&gt;" title="" data-original-title="已复制"></span>
+      </div>
+      </div><pre class="hljs xml"><code class="vue"><span class="hljs-comment">&lt;!--  
+./app/javascript/packs/hello_turbolinks.vue
+--&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>{{ message }}<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Object: {{ obj }} <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Number: {{ num }} <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Array: {{ arr }} <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>String: {{ str }} <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-attr">props</span>: [<span class="hljs-string">'obj'</span>, <span class="hljs-string">'arr'</span>, <span class="hljs-string">'num'</span>, <span class="hljs-string">'str'</span>],
+  <span class="hljs-attr">data</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> {
+      <span class="hljs-attr">message</span>: <span class="hljs-string">'Hello, Vue and Turbolinks'</span>
+    }
+  }
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">scoped</span>&gt;</span><span class="css">
+<span class="hljs-selector-tag">p</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">2em</span>;
+  <span class="hljs-attribute">text-align</span>: center;
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span></code></pre>
+<h3 id="articleHeader4">Create Vue Adapter</h3>
+<p>建立 <code>vue_adapter.js</code>，在 import Vue 的地方要載入 <code>vue.esm.js</code> 可以 compile template 的版本。另外要把需要使用到的 Vue Component 在這裡執行註冊：</p>
+<div class="widget-codetool" style="display: none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="// ./app/javascript/packs/vue_adapter.js
+import Vue from &#39;vue/dist/vue.esm.js&#39;
+import HelloTurbolinks from &#39;./hello_turbolinks&#39;
+
+/**
+ * Register components
+ */
+Vue.component(&#39;hello-turbolinks&#39;, HelloTurbolinks)
+
+function VueConstructor () {
+  let outlets = document.querySelectorAll(&#39;[data-vue-components-outlet]&#39;)
+  outlets.forEach(function (outlet, index) {
+    let id = outlet.getAttribute(&#39;data-vue-components-outlet&#39;)
+    new Vue({
+      el: &#39;[data-vue-components-outlet=&#39; + id + &#39;]&#39;
+    })
+  })
+}
+
+document.addEventListener(&#39;turbolinks:load&#39;, function () {
+  VueConstructor()
+})" title="" data-original-title="复制"></span>
+      </div>
+      </div><pre class="javascript hljs"><code class="js"><span class="hljs-comment">// ./app/javascript/packs/vue_adapter.js</span>
+<span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">'vue/dist/vue.esm.js'</span>
+<span class="hljs-keyword">import</span> HelloTurbolinks <span class="hljs-keyword">from</span> <span class="hljs-string">'./hello_turbolinks'</span>
+
+<span class="hljs-comment">/**
+ * Register components
+ */</span>
+Vue.component(<span class="hljs-string">'hello-turbolinks'</span>, HelloTurbolinks)
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">VueConstructor</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">let</span> outlets = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">'[data-vue-components-outlet]'</span>)
+  outlets.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">outlet, index</span>) </span>{
+    <span class="hljs-keyword">let</span> id = outlet.getAttribute(<span class="hljs-string">'data-vue-components-outlet'</span>)
+    <span class="hljs-keyword">new</span> Vue({
+      <span class="hljs-attr">el</span>: <span class="hljs-string">'[data-vue-components-outlet='</span> + id + <span class="hljs-string">']'</span>
+    })
+  })
+}
+
+<span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">'turbolinks:load'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  VueConstructor()
+})</code></pre>
+<blockquote><p>Notice:<br>-記得 import 的 Vue 要匯入的是 vue.esm.js<br>-記得註冊要使用的 Vue Component</p></blockquote>
+<h3 id="articleHeader5">add vue_adapter in head</h3>
+<p>在 layouts/application.html.erb 中的 <code>head</code> 中加入 <code>&lt;%= javascript_pack_tag 'vue_adapter', 'data-turbolinks-track': 'reload' %&gt;</code>：</p>
+<div class="widget-codetool" style="display: none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="&lt;!--
+./app/views/layouts/application.html.erb
+--&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;RailsSandboxVue&lt;/title&gt;
+    &lt;%= csrf_meta_tags %&gt;
+
+    &lt;%= stylesheet_link_tag    &#39;application&#39;, media: &#39;all&#39;, &#39;data-turbolinks-track&#39;: &#39;reload&#39; %&gt;
+    &lt;%= javascript_include_tag &#39;application&#39;, &#39;data-turbolinks-track&#39;: &#39;reload&#39; %&gt;
+    &lt;%= javascript_pack_tag &#39;vue_adapter&#39;, &#39;data-turbolinks-track&#39;: &#39;reload&#39; %&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;%= yield %&gt;
+  &lt;/body&gt;
+&lt;/html&gt;" title="" data-original-title="复制"></span>
+      </div>
+      </div><pre class="hljs xml"><code class="erb"><span class="hljs-comment">&lt;!--
+./app/views/layouts/application.html.erb
+--&gt;</span>
+<span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>RailsSandboxVue<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">csrf_meta_tags</span> %&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">stylesheet_link_tag</span>    '<span class="hljs-attr">application</span>', <span class="hljs-attr">media:</span> '<span class="hljs-attr">all</span>', '<span class="hljs-attr">data-turbolinks-track</span>'<span class="hljs-attr">:</span> '<span class="hljs-attr">reload</span>' %&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">javascript_include_tag</span> '<span class="hljs-attr">application</span>', '<span class="hljs-attr">data-turbolinks-track</span>'<span class="hljs-attr">:</span> '<span class="hljs-attr">reload</span>' %&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">javascript_pack_tag</span> '<span class="hljs-attr">vue_adapter</span>', '<span class="hljs-attr">data-turbolinks-track</span>'<span class="hljs-attr">:</span> '<span class="hljs-attr">reload</span>' %&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">yield</span> %&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+<blockquote><p>Notice: 記得要把 javascript_pack_tag 放在 head 當中</p></blockquote>
+<h3 id="articleHeader6">Import Vue component in template</h3>
+<p>我們把 Vue 的組件載入 index.html.erb 中，<code>data-vue-components-outlet</code> 這個屬性是關鍵字，後面放要載入的 Vue 組件名稱：</p>
+<div class="widget-codetool" style="display: none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="&lt;!--
+./app/views/users/index.html.erb
+--&gt;
+
+&lt;!--  以上省略  --&gt;
+&lt;% @hello_message = {num: 1, str: &#39;2&#39;, arr: [1, 2, 3], obj: {name: &#39;foo&#39;, age: 12}} %&gt;
+
+&lt;!-- Import Vue Component --&gt;
+&lt;div data-vue-components-outlet=&quot;hello-turbolinks&quot;&gt;
+  &lt;hello-turbolinks 
+  :obj=&quot;&lt;%= @hello_message[:obj].to_json %&gt;&quot; 
+  :arr=&quot;&lt;%= @hello_message[:arr] %&gt;&quot; 
+  :str=&quot;&lt;%= @hello_message[:str] %&gt;&quot;
+  :num=&quot;&lt;%= @hello_message[:num] %&gt;&quot;
+  &gt;&lt;/hello-turbolinks&gt;
+&lt;/div&gt;
+&lt;!-- End of Import Vue Component --&gt;
+
+&lt;%= link_to &#39;New User&#39;, new_user_path %&gt;" title="" data-original-title="复制"></span>
+      </div>
+      </div><pre class="hljs xml"><code class="erb"><span class="hljs-comment">&lt;!--
+./app/views/users/index.html.erb
+--&gt;</span>
+
+<span class="hljs-comment">&lt;!--  以上省略  --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">%</span> @<span class="hljs-attr">hello_message</span> = <span class="hljs-string">{num:</span> <span class="hljs-attr">1</span>, <span class="hljs-attr">str:</span> '<span class="hljs-attr">2</span>', <span class="hljs-attr">arr:</span> [<span class="hljs-attr">1</span>, <span class="hljs-attr">2</span>, <span class="hljs-attr">3</span>], <span class="hljs-attr">obj:</span> {<span class="hljs-attr">name:</span> '<span class="hljs-attr">foo</span>', <span class="hljs-attr">age:</span> <span class="hljs-attr">12</span>}} %&gt;</span>
+
+<span class="hljs-comment">&lt;!-- Import Vue Component --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">data-vue-components-outlet</span>=<span class="hljs-string">"hello-turbolinks"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">hello-turbolinks</span> 
+  <span class="hljs-attr">:obj</span>=<span class="hljs-string">"&lt;%= @hello_message[:obj].to_json %&gt;"</span> 
+  <span class="hljs-attr">:arr</span>=<span class="hljs-string">"&lt;%= @hello_message[:arr] %&gt;"</span> 
+  <span class="hljs-attr">:str</span>=<span class="hljs-string">"&lt;%= @hello_message[:str] %&gt;"</span>
+  <span class="hljs-attr">:num</span>=<span class="hljs-string">"&lt;%= @hello_message[:num] %&gt;"</span>
+  &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">hello-turbolinks</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- End of Import Vue Component --&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">link_to</span> '<span class="hljs-attr">New</span> <span class="hljs-attr">User</span>', <span class="hljs-attr">new_user_path</span> %&gt;</span></code></pre>
+<h3 id="articleHeader7">完成</h3>
+<p>分別開兩個 terminal 到 app 目錄底下，分別執行：</p>
+<div class="widget-codetool" style="display: none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="bin/webpack-dev-server
+bin/rails s" title="" data-original-title="复制"></span>
+      </div>
+      </div><pre class="shell hljs"><code class="shell">bin/webpack-dev-server
+bin/rails s</code></pre>
+<p>就可以看到 Vue Component 正確運作了。</p>
+<h3 id="articleHeader8">加入 View Helper</h3>
+<p>我們也可以寫一個 Rails View Helper 來方便我們使用 Vue 組件：</p>
+<p>在 <code>./app/helpers/</code> 中建立一支 <code>vue_helper.rb</code>：</p>
+<div class="widget-codetool" style="display: none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="# ./app/helpers/vue_helper.rb
+module VueHelper
+  def vue_outlet(html_options = {})
+    html_options = html_options.reverse_merge(data: {})
+    html_options[:data].tap do |data|
+      data[:vue_components_outlet] = &quot;_v&quot; + SecureRandom.hex(5)
+    end
+    html_tag = html_options[:tag] || :div
+    html_options.except!(:tag)
+    content_tag(html_tag, &#39;&#39;, html_options) do
+      yield
+    end
+  end
+end" title="" data-original-title="复制"></span>
+      </div>
+      </div><pre class="ruby hljs"><code class="ruby"><span class="hljs-comment"># ./app/helpers/vue_helper.rb</span>
+<span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">VueHelper</span></span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">vue_outlet</span><span class="hljs-params">(html_options = {})</span></span>
+    html_options = html_options.reverse_merge(<span class="hljs-symbol">data:</span> {})
+    html_options[<span class="hljs-symbol">:data</span>].tap <span class="hljs-keyword">do</span> <span class="hljs-params">|data|</span>
+      data[<span class="hljs-symbol">:vue_components_outlet</span>] = <span class="hljs-string">"_v"</span> + SecureRandom.hex(<span class="hljs-number">5</span>)
+    <span class="hljs-keyword">end</span>
+    html_tag = html_options[<span class="hljs-symbol">:tag</span>] <span class="hljs-params">||</span> <span class="hljs-symbol">:div</span>
+    html_options.except!(<span class="hljs-symbol">:tag</span>)
+    content_tag(html_tag, <span class="hljs-string">''</span>, html_options) <span class="hljs-keyword">do</span>
+      <span class="hljs-keyword">yield</span>
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></code></pre>
+<p>使用方式如下：</p>
+<div class="widget-codetool" style="display: none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="&lt;!--
+./app/views/users/index.html.erb
+--&gt;
+
+&lt;% @hello_message = {num: 1, str: &#39;2&#39;, arr: [1, 2, 3], obj: {name: &#39;foo&#39;, age: 12}} %&gt;
+
+&lt;!-- Import Vue Component by Helper --&gt;
+&lt;%= vue_outlet do %&gt;
+  &lt;hello-turbolinks 
+  :obj=&quot;&lt;%= @hello_message[:obj].to_json %&gt;&quot;
+  :arr=&quot;&lt;%= @hello_message[:arr] %&gt;&quot; 
+  :str=&quot;&lt;%= @hello_message[:str] %&gt;&quot;
+  :num=&quot;&lt;%= @hello_message[:num] %&gt;&quot;
+  &gt;
+&lt;% end %&gt;
+&lt;!-- End of Import Vue Component by Helper --&gt;" title="" data-original-title="复制"></span>
+      </div>
+      </div><pre class="hljs xml"><code class="erb"><span class="hljs-comment">&lt;!--
+./app/views/users/index.html.erb
+--&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">%</span> @<span class="hljs-attr">hello_message</span> = <span class="hljs-string">{num:</span> <span class="hljs-attr">1</span>, <span class="hljs-attr">str:</span> '<span class="hljs-attr">2</span>', <span class="hljs-attr">arr:</span> [<span class="hljs-attr">1</span>, <span class="hljs-attr">2</span>, <span class="hljs-attr">3</span>], <span class="hljs-attr">obj:</span> {<span class="hljs-attr">name:</span> '<span class="hljs-attr">foo</span>', <span class="hljs-attr">age:</span> <span class="hljs-attr">12</span>}} %&gt;</span>
+
+<span class="hljs-comment">&lt;!-- Import Vue Component by Helper --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">vue_outlet</span> <span class="hljs-attr">do</span> %&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">hello-turbolinks</span> 
+  <span class="hljs-attr">:obj</span>=<span class="hljs-string">"&lt;%= @hello_message[:obj].to_json %&gt;"</span>
+  <span class="hljs-attr">:arr</span>=<span class="hljs-string">"&lt;%= @hello_message[:arr] %&gt;"</span> 
+  <span class="hljs-attr">:str</span>=<span class="hljs-string">"&lt;%= @hello_message[:str] %&gt;"</span>
+  <span class="hljs-attr">:num</span>=<span class="hljs-string">"&lt;%= @hello_message[:num] %&gt;"</span>
+  &gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">%</span> <span class="hljs-attr">end</span> %&gt;</span>
+<span class="hljs-comment">&lt;!-- End of Import Vue Component by Helper --&gt;</span></code></pre>
+<p>如果需要 tag 不想要使用 div 可以加上 options：</p>
+<div class="widget-codetool" style="display: none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="&lt;!--
+./app/views/users/index.html.erb
+--&gt;
+
+&lt;!-- With &lt;p&gt; --&gt;
+&lt;%= vue_outlet tag: &#39;p&#39; do %&gt;
+  &lt;hello-turbolinks 
+  :obj=&quot;&lt;%= @hello_message[:obj].to_json %&gt;&quot;
+  :arr=&quot;&lt;%= @hello_message[:arr] %&gt;&quot; 
+  :str=&quot;&lt;%= @hello_message[:str] %&gt;&quot;
+  :num=&quot;&lt;%= @hello_message[:num] %&gt;&quot;
+  &gt;
+&lt;% end %&gt;
+&lt;!-- End of With &lt;p&gt; --&gt;" title="" data-original-title="复制"></span>
+      </div>
+      </div><pre class="hljs xml"><code class="erb"><span class="hljs-comment">&lt;!--
+./app/views/users/index.html.erb
+--&gt;</span>
+
+<span class="hljs-comment">&lt;!-- With &lt;p&gt; --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">vue_outlet</span> <span class="hljs-attr">tag:</span> '<span class="hljs-attr">p</span>' <span class="hljs-attr">do</span> %&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">hello-turbolinks</span> 
+  <span class="hljs-attr">:obj</span>=<span class="hljs-string">"&lt;%= @hello_message[:obj].to_json %&gt;"</span>
+  <span class="hljs-attr">:arr</span>=<span class="hljs-string">"&lt;%= @hello_message[:arr] %&gt;"</span> 
+  <span class="hljs-attr">:str</span>=<span class="hljs-string">"&lt;%= @hello_message[:str] %&gt;"</span>
+  <span class="hljs-attr">:num</span>=<span class="hljs-string">"&lt;%= @hello_message[:num] %&gt;"</span>
+  &gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">%</span> <span class="hljs-attr">end</span> %&gt;</span>
+<span class="hljs-comment">&lt;!-- End of With &lt;p&gt; --&gt;</span></code></pre>
+<h2 id="articleHeader9">檔案範例</h2>
+<p><a href="https://github.com/PJCHENder/template-rails-vue-turbolinks" rel="nofollow noreferrer" target="_blank">template-rails-vue-turbolinks</a> @ Github</p>
+<h2 id="articleHeader10">開發者</h2>
+<ul>
+<li><p><a href="https://segmentfault.com/u/andyyu0920">@andyyu0920</a> @ segmentfault</p></li>
+<li><p><a href="https://github.com/andyyou" rel="nofollow noreferrer" target="_blank">Andyyou</a> @ Github</p></li>
+</ul>
+<h2 id="articleHeader11">參考</h2>
+<ul>
+<li><p><a href="https://gist.github.com/scottcorgan/b35cb59f21acd392d07020a700d017b7" rel="nofollow noreferrer" target="_blank">Make Vue.js works with Ruby on Rails and Turbolinks 5</a><iframe id="special-gistscottcorgan/b35cb59f21acd392d07020a700d017b7" style="width: 100%; height: 150px;" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/saved_resource(5).html" frameborder="0" class="loading"></iframe> @ Gist</p></li>
+<li><p><a href="https://github.com/jeffreyguenther/vue-turbolinks" rel="nofollow noreferrer" target="_blank">A Vue mixin to fix Turbolinks caching</a> @ Vue Turbolinks</p></li>
+<li><p><a href="https://github.com/turbolinks/turbolinks/wiki/VueJs-and-Turbolinks" rel="nofollow noreferrer" target="_blank">VueJs and Turbolinks</a> @ turbolinks</p></li>
+</ul>
+
+                </div>
+                                                
+                <div class="clearfix mt10">
+                    <ul class="article-operation list-inline pull-left mt15"><li><a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img class="mb5" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/creativecommons-cc.svg" height="20"></a></li><li class="dropdown js__content-ops hidden-xs" data-module="article" data-id="1190000010580797" data-typetext="文章"><a href="javascript:void(0);" class="dropdown-toggle text-muted" data-toggle="dropdown"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a><ul class="dropdown-menu dropdown-menu-left"><li><a href="https://segmentfault.com/a/1190000010580797#911" data-toggle="modal" data-target="#911" data-action="report">举报</a></li></ul></li></ul>
+                    <div class="pull-right mt-10 hidden-xs">
+                        <div class="widget-share__full" data-text="如何在 Rails 中搭配 Turbolinks 使用 Vue" data-url="https://segmentfault.com/a/1190000010580797" data-shorturl="http://sfau.lt/b5SyIb"><div class="widget-share-network sharer-0" style="display: block;"><ul class="sn-inline"><li data-network="weibo"><a href="javascript:void(0);" class="entypo-weibo icon-sn-weibo share-1" data-toggle="tooltip" data-placement="top" title="" data-original-title="分享至新浪微博">新浪微博</a></li><li data-network="wechart"><a href="javascript:void(0);" class="entypo-wechart icon-sn-weixin share-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="分享至微信">微信</a></li><li data-network="twitter"><a href="javascript:void(0);" class="entypo-twitter icon-sn-twitter share-3" data-toggle="tooltip" data-placement="top" title="" data-original-title="分享至 Twitter">Twitter</a></li><li data-network="facebook"><a href="javascript:void(0);" class="entypo-facebook icon-sn-facebook share-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="分享至 Facebook">Facebook</a></li></ul></div><a type="button" class="btn btn-sm shareMore btn-sn-more" data-toggle="popover" data-placement="top" data-url="https://segmentfault.com/a/1190000010580797" data-shorturl="http://sfau.lt/b5SyIb"><span class="icon-sn-dotted" data-original-title="" title=""></span><strong class="visible-xs-inline">•••</strong></a></div>
+
+
+                    </div>
+                </div>
+                <div class="mt10 text-center mb30"><button type="button" id="mainLike" data-id="1190000010580797" class="btn btn-success btn-lg mr15 "><span id="mainLikeText">赞</span>&nbsp;&nbsp;<span class="seprator">|</span>&nbsp;&nbsp;
+                                <span id="mainLikeNum">0 </span></button><button type="button" id="mainBookmark" data-type="article" data-id="1190000010580797" class="btn btn-default btn-lg "><span id="mainBookmarkText">收藏</span>&nbsp;&nbsp;<span class="seprator">|</span>&nbsp;&nbsp;<span id="mainBookmarkNum">1</span></button></div>                
+                <script type="text/javascript">
+                    OA_show(3);
+                </script><div style="text-align: center; line-height: 0; background: #FAFAFA"><script async="" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/f(5).txt"></script>
+<!-- 中部横幅广告位 -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6330872677300335" data-ad-slot="5598290435" data-adsbygoogle-status="done"><ins id="aswift_2_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent;"><ins id="aswift_2_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent;"><iframe width="728" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;border:0px;width:728px;height:90px;" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/saved_resource(6).html"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div id="beacon_f3f4b4b884" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/lg(1).php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div></div>
+
+
+                <h4 class="pt20 mb15 mt0 border-top">你可能感兴趣的</h4>
+
+                                <div id="paradigm-article-related"><div class="recommend-post mb30"><ul class="widget-links"><li><a href="http://segmentfault.com/a/1190000005363030" title="vue + webpack 起手式" target="_blank">vue + webpack 起手式</a><span class="text-muted">andyyu0920</span><a class="tag" taget="_blank" href="https://segmentfault.com/t/vue.js">vue.js</a><a class="tag" taget="_blank" href="https://segmentfault.com/t/webpack">webpack</a></li><li><a href="http://segmentfault.com/a/1190000005783325" title="Vue 實作簡易驗證機制 App" target="_blank">Vue 實作簡易驗證機制 App</a><span class="text-muted">andyyu0920</span><a class="tag" taget="_blank" href="https://segmentfault.com/t/vue.js">vue.js</a></li><li><a href="http://segmentfault.com/a/1190000007699455" title="Vue.js 由 1 到 2 的旅程 - (1)" target="_blank">Vue.js 由 1 到 2 的旅程 - (1)</a><span class="text-muted">andyyu0920</span><a class="tag" taget="_blank" href="https://segmentfault.com/t/vue.js">vue.js</a></li><li><a href="http://segmentfault.com/a/1190000010124197" title="使用 Rails Webpacker 安裝 Foundation 6" target="_blank">使用 Rails Webpacker 安裝 Foundation 6</a><span class="text-muted">andyyu0920</span><a class="tag" taget="_blank" href="https://segmentfault.com/t/foundation">foundation</a><a class="tag" taget="_blank" href="https://segmentfault.com/t/webpack">webpack</a><a class="tag" taget="_blank" href="https://segmentfault.com/t/ruby-on-rails">ruby-on-rails</a></li><li><a href="http://segmentfault.com/a/1190000007408999" title="穠纖合度的整合 Rails、Webpack、Vuejs" target="_blank">穠纖合度的整合 Rails、Webpack、Vuejs</a><span class="text-muted">andyyu0920</span><a class="tag" taget="_blank" href="https://segmentfault.com/t/ruby-on-rails">ruby-on-rails</a><a class="tag" taget="_blank" href="https://segmentfault.com/t/vue.js">vue.js</a></li><li><a href="http://segmentfault.com/a/1190000000489310" title="Rails程序员学习英语的方法" target="_blank">Rails程序员学习英语的方法</a><span class="text-muted">天赢金创</span><a class="tag" taget="_blank" href="https://segmentfault.com/t/ruby-on-rails">ruby-on-rails</a></li><li><a href="http://segmentfault.com/a/1190000000482233" title="创业失败的一些经验总结" target="_blank">创业失败的一些经验总结</a><span class="text-muted">手线</span><a class="tag" taget="_blank" href="https://segmentfault.com/t/ruby-on-rails">ruby-on-rails</a><a class="tag" taget="_blank" href="https://segmentfault.com/t/%E6%B1%82%E8%81%8C">求职</a><a class="tag" taget="_blank" href="https://segmentfault.com/t/%E7%BB%8F%E9%AA%8C">经验</a><a class="tag" taget="_blank" href="https://segmentfault.com/t/%E5%88%9B%E4%B8%9A">创业</a></li><li><a href="http://segmentfault.com/a/1190000007586276" title="Rails 学习心得" target="_blank">Rails 学习心得</a><span class="text-muted">余海玲</span><a class="tag" taget="_blank" href="https://segmentfault.com/t/ruby">ruby</a><a class="tag" taget="_blank" href="https://segmentfault.com/t/ruby-on-rails">ruby-on-rails</a></li></ul></div></div>
+
+                
+        <div class="comments--news comments--default comments--article 
+    " data-id="1190000010580797" data-user-id="" data-author-id="1030000005926234 " data-is-admin="null" id="goToReplyArea">
+                    <div class="mb10 clearfix">
+                <strong class="comments-stat pull-left mr10">评论</strong>
+
+                                                    <div class="btn-group btn-group-xs pull-right comments-sort btn-group-menu" role="menu">
+                        <a href="javascript:;" class="btn btn-default active" data-sort="default">默认排序</a>
+                        <a href="javascript:;" class="btn btn-default" data-sort="desc">时间排序</a>
+                    </div>
+                            </div>
+                <div class="comments-container">
+                                <div class="comments-list">
+            </div>
+    <div class="comments-loading hide">载入中...</div>
+        <div class="comments-more hide"><a href="javascript:;">显示更多评论</a></div>
+    
+
+                                    <div class="comments-box" id="goToReplyEditor">
+                <div class="pull-left">
+                    <img class="avatar-32 " src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/user-128.png" alt="">
+                </div>
+                <div class="comments-box-content">
+                    <form action="https://segmentfault.com/api/article/1190000010580797/comments/add">
+                        <div class="form-group mb0">
+                            <textarea name="text" rows="3" class="form-control" placeholder="文明社会，理性评论"></textarea>
+                            <div class="mt15 text-right">
+                                <button type="button" class="hide"></button>
+                                <button class=" btn btn-primary" type="button">发布评论</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+                                                        </div>
+    </div>
+
+
+                                    
+                
+                
+
+            </div><!-- /.main -->
+
+
+            <div class="col-md-3 side hidden-sm hidden-xs mt30" style="height: 6437px;">
+                                                
+                <div class="mb25 hidden-md hidden-sm hidden-xs">
+    <img src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/20191105.png" alt="Planets" usemap="#gridsMap" width="255" height="136">
+    <map name="gridsMap" id="gridsMap"><area shape="rect" target="_blank" onmouseover="SFGridAd.d(this)" onmouseout="SFGridAd.e(this)" onclick="SFGridAd.c(1750000020633409)" coords="0,119,17,136" href="http://www.h5ds.com/?from=segmentfault" stitle="免费开源的H5制作工具"><area shape="rect" target="_blank" onmouseover="SFGridAd.d(this)" onmouseout="SFGridAd.e(this)" onclick="SFGridAd.c(1750000020860644)" coords="85,68,153,85" href="https://fundebug.com/?utm_source=sf_lattice_ad" stitle="一行代码搞定BUG监控"><area shape="rect" target="_blank" onmouseover="SFGridAd.d(this)" onmouseout="SFGridAd.e(this)" onclick="SFGridAd.c(1750000020877813)" coords="85,34,153,51" href="https://www.openinstall.io/" stitle="Android / iOS 一个包走天下！"><area shape="rect" target="_blank" onmouseover="SFGridAd.d(this)" onmouseout="SFGridAd.e(this)" onclick="SFGridAd.c(1750000020885828)" coords="17,0,34,17" href="http://www.iqzhan.cn/channel.asp?id=63" stitle="自学PS  学一个自己录制一个"></map>
+    <div style="text-align: center;"><a style="text-align:center; color:#9E9E9E; font-size:12px" href="https://segmentfault.com/sponsor">广告位促销，月曝光三千万，10 元/天</a></div>
+            <script async="" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/20191105.js"></script>
+    </div>
+
+                                <style>
+                    .job-recommend-area a:not(:last-of-type) {margin-bottom:10px; display: block}
+                    .job-recommend-area a:hover {text-decoration: none;}
+                </style>
+                <div class="hidden-md">
+                    <div class="job-recommend">
+                      <h3 class="job-title">推广链接</h3>
+                      <div class="job-recommend-area">
+                        <script type="text/javascript">
+                            OA_show(7);
+                            OA_show(9);
+                            OA_show(10);
+                            OA_show(15);
+                            OA_show(16);
+                        </script><a href="https://sponsor.segmentfault.com/ck.php?oaparams=2__bannerid=53__zoneid=7__cb=8ec4683c62__oadest=https%3A%2F%2Fsegmentfault.com%2Fls%2F1650000016424063" target="_blank"><strong>iView 实战系列课程</strong><br>
+<small style="color: #999"><span style="color: #F7A700">[限时优惠]</span> 知名开源组件库作者讲授</small></a><div id="beacon_8ec4683c62" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/lg(2).php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
+<a href="https://sponsor.segmentfault.com/ck.php?oaparams=2__bannerid=57__zoneid=9__cb=28b7885778__oadest=https%3A%2F%2Fsegmentfault.com%2Fls%2F1650000011387052" target="_blank"><strong> Java 微服务实践课</strong><br>
+<small style="color: #999">上千人学习过的微服务实栈课</small></a><div id="beacon_28b7885778" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/lg(3).php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
+<a href="https://sponsor.segmentfault.com/ck.php?oaparams=2__bannerid=56__zoneid=10__cb=d49e644165__oadest=https%3A%2F%2Fsegmentfault.com%2Fls%2F1650000011318558" target="_blank"><strong>大神的PHP 进阶之路</strong><br>
+<small style="color: #999">亿级 PV 项目的架构梳理，性能提升实战</small></a><div id="beacon_d49e644165" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/lg(4).php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
+<a href="https://sponsor.segmentfault.com/ck.php?oaparams=2__bannerid=47__zoneid=15__cb=c0dd71cced__oadest=https%3A%2F%2Fsegmentfault.com%2Fls%2F1650000016221751" target="_blank"><strong>Vue 技术栈开发实战</strong><br>
+<small style="color: #999">iView 核心开发者带你掌握 Vue 精髓</small></a><div id="beacon_c0dd71cced" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/lg(5).php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
+<div id="beacon_213388a46c" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/lg(6).php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
+
+                      </div>
+                    </div>
+                    <style>
+                    .job-recommend {margin-bottom: 30px;}
+                    .job-title {
+                        font-size: 14px;
+                        color: #017E66;
+                        font-weight: 500;
+                        background: #BFE6D7;
+                        margin: 0;
+                        padding-top: 6px;
+                        padding-bottom: 6px;
+                        text-align: center;
+                    }
+                    .job-recommend-area {
+                      padding: 13px;
+                      border: 3px solid #EBF7F3;
+                      border-top: none;
+                    }
+                    </style>
+                </div>
+
+                                
+                <div class="hidden-md ad-should-be-fixed stuckMenu" style="position: relative; top: 0px; display: block;">
+                    <div class="mb25 block">
+                        <script type="text/javascript">
+                            OA_show(1);
+                        </script><script async="" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/f(5).txt"></script>
+<!-- 侧栏矩形 -->
+<ins class="adsbygoogle" style="display:inline-block;width:255px;height:213px" data-ad-client="ca-pub-6330872677300335" data-ad-slot="9674628595" data-adsbygoogle-status="done"><ins id="aswift_3_expand" style="display:inline-table;border:none;height:213px;margin:0;padding:0;position:relative;visibility:visible;width:255px;background-color:transparent;"><ins id="aswift_3_anchor" style="display:block;border:none;height:213px;margin:0;padding:0;position:relative;visibility:visible;width:255px;background-color:transparent;"><iframe width="255" height="213" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;border:0px;width:255px;height:213px;" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/saved_resource(7).html"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div id="beacon_2fb53b8b1a" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/lg(7).php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
+
+                    </div>
+                </div>
+                <div class="post-nav hidden-xs side-outline hidden-sm" style="display: block; position: sticky; top: 238px; margin-top: 0px;">
+                    <div class="panel panel-default widget-outline">
+                        <div class="panel-heading">目录</div>
+                        <div class="panel-body">
+                            <div class="nav-body" style="overflow: scroll; top: 0px; height: 323px;">
+                                <div class="highlight-title" style="display: none; top: 0px; height: 27px;"></div>
+                                <ul class="articleIndex"><li class=""><a href="https://segmentfault.com/a/1190000010580797#articleHeader0">[Rails] Vue-outlet for Turbolinks</a></li><li style="list-style:none;"><ul><li class=""><a href="https://segmentfault.com/a/1190000010580797#articleHeader1">Initialize the App</a></li><li class=""><a href="https://segmentfault.com/a/1190000010580797#articleHeader2">Scaffold the app</a></li><li class=""><a href="https://segmentfault.com/a/1190000010580797#articleHeader3">Create Vue Component</a></li><li class=""><a href="https://segmentfault.com/a/1190000010580797#articleHeader4">Create Vue Adapter</a></li><li class=""><a href="https://segmentfault.com/a/1190000010580797#articleHeader5">add vue_adapter in head</a></li><li class=""><a href="https://segmentfault.com/a/1190000010580797#articleHeader6">Import Vue component in template</a></li><li class=""><a href="https://segmentfault.com/a/1190000010580797#articleHeader7">完成</a></li><li class=""><a href="https://segmentfault.com/a/1190000010580797#articleHeader8">加入 View Helper</a></li></ul></li><li class=""><a href="https://segmentfault.com/a/1190000010580797#articleHeader9">檔案範例</a></li><li class=""><a href="https://segmentfault.com/a/1190000010580797#articleHeader10">開發者</a></li><li class=""><a href="https://segmentfault.com/a/1190000010580797#articleHeader11">參考</a></li></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div><!-- /.side -->
+        </div>
+    </div>
+</div>
+
+<div id="shareToWeiboModal" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">分享</h4>
+            </div>
+            <div class="modal-body">
+                <p class="sfModal-content">
+                    分享到微博？
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default dont-likeweibo" data-dismiss="modal">取消</button>
+                <a href="https://segmentfault.com/a/1190000010580797" id="shareLink" class="btn btn-primary done-btn" target="_blank" onclick="$(&#39;#shareToWeiboModal&#39;).modal(&#39;hide&#39;)">分享</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal widget-911" id="911" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">×</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title"><span data-model="action"></span><span data-model="type"></span></h4>
+      </div>
+      <div class="modal-body">
+        <form id="reportForm">
+          <!-- 后台返回信息 -->
+          <p class="alert alert-warning" data-model="returnMsg"></p>
+          <div data-role="base">
+            <p>
+              <strong class="required">我要<span data-model="action"></span>该<span data-model="type"></span>，理由是：</strong>
+            </p>
+            <ul class="list-unstyled" data-model="list"></ul>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default pull-left" type="button" data-role="back" style="display:none">返回重选</button>
+                <button class="btn btn-default" data-dismiss="modal" type="button">取消</button>
+        <button class="btn btn-primary" data-role="submit" type="button">提交</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal widget-seo" id="seo" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title"><span data-model="action"></span><span data-model="type"></span></h4>
+            </div>
+            <div class="modal-body">
+                <form id="seoForm">
+                    <!-- 后台返回信息 -->
+                    <p class="alert alert-warning" data-model="returnMsg" style="display: none;"></p>
+                    <div data-role="base">
+                        <div class="form-group">
+                            <label>SEO标题：</label><textarea style="min-height: 35px; width: 100%; max-height: 132px; overflow: hidden; overflow-wrap: break-word; height: 32px;" name="title" class="form-control" rows="1" placeholder="请输入SEO标题"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>SEO描述：</label><textarea style="min-height: 35px; max-height: 132px; overflow: hidden; overflow-wrap: break-word; height: 32px;" name="desc" class="form-control" rows="1" placeholder="请输入SEO描述"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>SEO keywords：</label><textarea style="min-height: 35px; max-height: 132px; overflow: hidden; overflow-wrap: break-word; height: 32px;" name="keywords" class="form-control" rows="1" placeholder="请输入SEO keywords"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" type="button">取消</button>
+                <button class="btn btn-primary" data-role="submit" type="button">提交</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+    <div id="loginBanner" class="hidden-sm hidden-xs loginBanner">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-7">
+                <h1 class="title">在 SegmentFault，学习技能、解决问题</h1>
+                <p class="desc">每个月，我们帮助 1000 万的开发者解决各种各样的技术问题。并助力他们在技术能力、职业生涯、影响力上获得提升。</p>
+            </div>
+            <div class="col-lg-3 col-lg-offset-3 col-md-4 col-md-offset-1">
+                <form class="register-form clearfix" action="https://segmentfault.com/api/user/phone/register">
+
+                    
+                    <a href="https://segmentfault.com/user/register" class="SFLogin btn btn-lg btn-primary mr15">免费注册</a>
+                    <a href="https://segmentfault.com/user/login" class="SFRegister btn btn-lg btn-primary">立即登录</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    OA_show(4);
+</script><div id="beacon_753931f077" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/lg(8).php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
+
+
+<footer id="footer">
+    <div class="container">
+        <div class="row hidden-xs">
+            <dl class="col-sm-2 site-link">
+                <dt>产品</dt>
+                                <dd><a href="https://segmentfault.com/questions/hottest?utm_source=sf-footer" target="_blank">热门问答</a></dd>
+                                <dd><a href="https://segmentfault.com/blogs/hottest?utm_source=sf-footer" target="_blank">热门专栏</a></dd>
+                                <dd><a href="https://segmentfault.com/lives?utm_source=sf-footer" target="_blank">热门课程</a></dd>
+                                <dd><a href="https://segmentfault.com/events?utm_source=sf-footer" target="_blank">最新活动</a></dd>
+                                <dd><a href="https://segmentfault.com/groups?utm_source=sf-footer" target="_blank">技术圈</a></dd>
+                                <dd><a href="https://segmentfault.com/groups?tab=jobs&amp;utm_source=sf-footer" target="_blank">酷工作</a></dd>
+                                <dd><a href="https://segmentfault.com/app?utm_source=sf-footer" target="_blank">移动客户端</a></dd>
+                            </dl>
+            
+            <dl class="col-sm-2 site-link">
+                <dt>课程</dt>
+                                <dd><a href="https://segmentfault.com/lives/edu?tag=java&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">Java 开发课程</a></dd>
+                                <dd><a href="https://segmentfault.com/lives/edu?tag=php&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">PHP 开发课程</a></dd>
+                                <dd><a href="https://segmentfault.com/lives/edu?tag=python&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">Python 开发课程</a></dd>
+                                <dd><a href="https://segmentfault.com/lives/edu?category=1&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">前端开发课程</a></dd>
+                                <dd><a href="https://segmentfault.com/lives/study?category=3&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">移动开发课程</a></dd>
+                            </dl>
+
+            <dl class="col-sm-2 site-link">
+                <dt>资源</dt>
+                                <dd><a href="https://segmentfault.com/weekly?utm_source=sf-footer" target="_blank">每周精选</a></dd>
+                                <dd><a href="https://segmentfault.com/users?utm_source=sf-footer" target="_blank">用户排行榜</a></dd>
+                                <dd><a href="https://segmentfault.com/badges?utm_source=sf-footer" target="_blank">徽章</a></dd>
+                                <dd><a href="https://segmentfault.com/faq?utm_source=sf-footer" target="_blank">帮助中心</a></dd>
+                                <dd><a href="https://segmentfault.com/repu?utm_source=sf-footer" target="_blank">声望与权限</a></dd>
+                                <dd><a href="https://segmentfault.com/community?utm_source=sf-footer" target="_blank">社区服务中心</a></dd>
+                            </dl>
+            
+            <dl class="col-sm-2 site-link">
+                <dt>合作</dt>
+                                <dd><a href="https://about.segmentfault.com/?utm_source=sf-footer" target="_blank">关于我们</a></dd>
+                                <dd><a href="https://business.segmentfault.com/ads?utm_source=sf-footer" target="_blank">广告投放</a></dd>
+                                <dd><a href="https://segmentfault.com/groups?tab=jobs&amp;utm_source=sf-footer" target="_blank">职位发布</a></dd>
+                                <dd><a href="https://segmentfault.com/lives/apply?utm_source=sf-footer" target="_blank">讲师招募</a></dd>
+                                <dd><a href="https://about.segmentfault.com/contact.html?utm_source=sf-footer" target="_blank">联系我们</a></dd>
+                                <dd><a href="https://segmentfault.com/link?utm_source=sf-footer" target="_blank">合作伙伴</a></dd>
+                            </dl>
+
+            <dl class="col-sm-2 site-link">
+                <dt>关注</dt>
+                                <dd><a href="https://segmentfault.com/blog/segmentfault?utm_source=sf-footer" target="_blank">产品技术日志</a></dd>
+                                <dd><a href="https://segmentfault.com/blog/community_admin?utm_source=sf-footer" target="_blank">社区运营日志</a></dd>
+                                <dd><a href="https://segmentfault.com/blog/segmentfault_news?utm_source=sf-footer" target="_blank">市场运营日志</a></dd>
+                                <dd><a href="https://segmentfault.com/blog/segmentfault_team?utm_source=sf-footer" target="_blank">团队日志</a></dd>
+                                <dd><a href="https://segmentfault.com/blog/interview?utm_source=sf-footer" target="_blank">社区访谈</a></dd>
+                                <dd>
+                    <ul class="sn-inline">
+                        <li>
+                            <a class="entypo-wechart icon-sn-weixin weixin-popover-qrcode" data-toggle="popover" data-placement="top" data-content="" data-original-title="" title="">微信</a>
+                        </li>
+                        <li>
+                            <a href="http://weibo.com/segmentfault" target="_blank" class="entypo-weibo icon-sn-weibo">新浪微博</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/SegmentFault" target="_blank" class="entypo-facebook icon-sn-github">Github</a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/segment_fault" target="_blank" class="entypo-twitter icon-sn-twitter">Twitter</a>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+
+            <dl class="col-sm-2 site-link" id="license">
+                <dt>条款</dt>
+                                <dd><a href="https://segmentfault.com/tos?utm_source=sf-footer" target="_blank">服务条款</a></dd>
+                                <dd><a href="https://segmentfault.com/privacy?utm_source=sf-footer" target="_blank">隐私政策</a></dd>
+                                <dd>
+                    <a href="https://segmentfault.com/app" class="clearfix mt10 block"><img src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/appQrcode.png" class="app-qrcode"></a>
+                    <div class="app-download-desc">
+                        <p>扫一扫下载 App</p>
+                    </div>
+                    
+                </dd>
+            </dl>
+        </div>
+        <div class="copyright">
+            Copyright © 2011-2019 SegmentFault. 当前呈现版本 19.02.27<br>
+            <a href="http://beian.miit.gov.cn/" rel="nofollow">浙ICP备 15005796号-2</a> &nbsp;
+            <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602002000" rel="nofollow">浙公网安备 33010602002000号</a>
+            <span class="ml5">杭州堆栈科技有限公司版权所有</span>
+            <p class="mt30">CDN 存储服务由 <a target="_blank" href="https://www.upyun.com/?utm_source=segmentfault&amp;utm_medium=link&amp;utm_campaign=upyun&amp;md=segmentfault">又拍云</a> 赞助提供 </p>
+        </div>
+        <p class="text-center">
+            <a class="js__view--selector hidden-sm hidden-md hidden-lg" data-action="mobile" href="javascript:;">移动版</a>
+            <a class="js__view--selector hidden-sm hidden-md hidden-lg" data-action="desktop" href="javascript:;">桌面版</a>
+        </p>
+    </div>
+</footer>
+
+<div id="fixedTools" class="hidden-xs hidden-sm">
+    <a id="backtop" class="border-bottom hidden" href="https://segmentfault.com/a/1190000010580797#">回顶部</a>
+</div>
+
+    <script id="loginModal" type="text/template">
+    <div class="row bg-white login-modal">
+        <div class="col-md-12 login-wrap">
+            <form action="/api/user/login" method="POST" role="form" class="mt15">
+                <div class="form-group hidden">
+                                        <input type="text" class="form-control" name="remember" value="1"
+                           autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="username" class="control-label">手机号 或 Email</label>
+                    <input type="text" class="form-control" name="username" tabindex="1" required placeholder="11 位手机号 或 Email"
+                           autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">密码</label><span class="pull-right"><a
+                                href="/user/forgot" tabindex="4">忘记密码</a></span>
+                    <input type="password" class="form-control" name="password" tabindex="2" required placeholder="请输入密码">
+                </div>
+                <div class="form-group">
+                    <a
+                            
+                                                    href="/user/phoneLogin"
+                            class="phoneLogin"
+                                            >手机验证码登录</a>
+                </div>
+                <div class="form-group clearfix">
+                    <button type="submit" class="btn-block btn btn-primary pull-right pl20 pr20" tabindex="3"
+                            onclick='ga("send", "event", "email login button", "clicked", "login modal");'>登录
+                    </button>
+                </div>
+            </form>
+            <div class="text-muted text-center more-login-area">
+    <span class="more-login-words">更多登录方式</span>
+</div>
+<div class="widget-login mb15 text-center">
+    <a href="/user/oauth/google" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "google"});'><span
+                class="icon-sn-google"></span></a>
+    <a href="/user/oauth/github" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "github"});");'><span
+                class="icon-sn-github"></span></a>
+    <a href="/user/oauth/weibo" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "weibo"});'><span
+                class="icon-sn-weibo"></span></a>
+    <a href="/user/oauth/qq" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "qq"});'><span
+                class="icon-sn-qq"></span></a>
+    <a href="/user/oauth/weixin" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "qq"});'><span
+                class="icon-sn-weixin"></span></a>
+    <a href="/user/oauth/linkedin" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "linkedin"});'><span
+                class="icon-sn-linkedin"></span></a>
+    <span id="loginShowMore" style="cursor: pointer" class="mb5"><span class="icon-sn-dotted"></span></span>
+    <a href="/user/oauth/twitter" class=" hidden"
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "twitter"});'><span
+                class="icon-sn-twitter"></span></a>
+    <a href="/user/oauth/facebook" class=" hidden"
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "facebook"});'><span
+                class="icon-sn-facebook"></span></a>
+    <a href="/user/oauth/douban" class=" hidden"
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "douban"});'><span
+                class="icon-sn-douban"></span></a>
+</div>
+<div class="form-group clearfix">
+    <a class="btn-block btn btn-default pull-right pl20 pr20 
+                        SFLogin
+             "
+
+            
+        onclick='ga("send", "event", "email login button", "clicked", "login modal");'>
+                    注册新账号
+            </a>
+</div>
+<p class="text-muted text-center mb15">继续即表示你同意<a href="/tos" target="_blank">《服务条款》</a>和<a href="/privacy" target="_blank">《隐私政策》</a></p>        </div>
+    </div>
+</script>
+    <script id="registerModal" type="text/template">
+    <div class="row bg-white login-modal">
+        <div class="col-md-12 login-wrap">
+            
+            <form action="/api/user/register" method="POST" role="form" class="mt15">
+                <div class="form-group">
+                    <label for="name" class="control-label">你的名字</label>
+                    <input type="text" class="form-control" name="name" required placeholder="真实姓名或常用昵称">
+                </div>
+                
+                <div class="form-group">
+                    <label for="mail" class="control-label">手机号</label>
+                    <input type="text" class="form-control" id="login-name" name="mail" required placeholder="11 位手机号">
+                </div>
+                
+                <input type="text" class="hidden" name="register_type" value="mail">
+
+                <div class="form-group">
+                    <div class="captchaInput mb10">
+                        <input type="text" class="form-control" name="cap" placeholder="右侧的验证码" style="width:50%; display: inline; margin-right: 15px;">
+                        <span class="mt10">
+                                <a id="loginReloadCaptcha" href="javascript:void(0)">
+                                <img src="/user/captcha?w=135&h=34" class="cap" width="135" height="34"/></a>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="phone-register-only hidden">
+                        <div class="input-group">
+                            <input name="code" type="text" class="form-control js-user-login__phone-code-value" placeholder="短信验证码">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default js-user-login__phone-vaild-btn" style="width:96px;" type="button">
+                                获取验证码</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="control-label">密码</label>
+                    <input type="password" class="form-control" name="password" required placeholder="不少于 6 位的密码">
+                </div>
+                <div class="form-group clearfix">
+                    <button type="submit" class="btn-block btn btn-primary pl20 pr20 pull-right"
+                            onclick='ga("send", "event", "email register button", "clicked", "login modal");'>注册
+                    </button>
+                </div>
+                                <div class="text-muted text-center more-login-area">
+    <span class="more-login-words">更多登录方式</span>
+</div>
+<div class="widget-login mb15 text-center">
+    <a href="/user/oauth/google" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "google"});'><span
+                class="icon-sn-google"></span></a>
+    <a href="/user/oauth/github" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "github"});");'><span
+                class="icon-sn-github"></span></a>
+    <a href="/user/oauth/weibo" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "weibo"});'><span
+                class="icon-sn-weibo"></span></a>
+    <a href="/user/oauth/qq" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "qq"});'><span
+                class="icon-sn-qq"></span></a>
+    <a href="/user/oauth/weixin" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "qq"});'><span
+                class="icon-sn-weixin"></span></a>
+    <a href="/user/oauth/linkedin" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "linkedin"});'><span
+                class="icon-sn-linkedin"></span></a>
+    <span id="loginShowMore" style="cursor: pointer" class="mb5"><span class="icon-sn-dotted"></span></span>
+    <a href="/user/oauth/twitter" class=" hidden"
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "twitter"});'><span
+                class="icon-sn-twitter"></span></a>
+    <a href="/user/oauth/facebook" class=" hidden"
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "facebook"});'><span
+                class="icon-sn-facebook"></span></a>
+    <a href="/user/oauth/douban" class=" hidden"
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "douban"});'><span
+                class="icon-sn-douban"></span></a>
+</div>
+<div class="form-group clearfix">
+    <a class="btn-block btn btn-default pull-right pl20 pr20 
+                        SFRegister
+             "
+
+            
+        onclick='ga("send", "event", "email login button", "clicked", "login modal");'>
+                    已有账号登录
+            </a>
+</div>
+<p class="text-muted text-center mb15">继续即表示你同意<a href="/tos" target="_blank">《服务条款》</a>和<a href="/privacy" target="_blank">《隐私政策》</a></p>            </form>
+        </div>
+    </div>
+</script>
+    <script id="phoneLoginModal" type="text/template">
+
+    <div class="row bg-white login-modal phonelogin-modal">
+        <div class="col-md-12 login-wrap">
+            <form action="/api/user/phonelogin" method="POST" role="form" class="mt15">
+                <div class="form-group">
+                    <label for="phone" class="control-label required">手机号</label>
+                    <input type="text" class="form-control phonelogin--phone" name="phone" tabindex="1" required placeholder="11 位手机号"
+                           autocomplete="off">
+                    <span class="help-block"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="authCode" class="control-label required">验证码</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control bindphone--code" name="authCode" placeholder="短信验证码">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default user-bind__phone-vaild-btn" type="button">获取验证码</button>
+                        </span>
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+
+                <div class="form-group">
+                    <a 
+                                                            href="/user/login"
+                                class="SFRegister"
+                                                >密码登录（手机号或 Email）</a>
+                </div>
+                <div class="form-group clearfix">
+                    <button type="submit" class="btn-block btn btn-primary pull-right pl20 pr20" tabindex="3"
+                            onclick='ga("send", "event", "email login button", "clicked", "login modal");'>登录
+                    </button>
+                </div>
+            </form>
+            <div class="text-muted text-center more-login-area">
+    <span class="more-login-words">更多登录方式</span>
+</div>
+<div class="widget-login mb15 text-center">
+    <a href="/user/oauth/google" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "google"});'><span
+                class="icon-sn-google"></span></a>
+    <a href="/user/oauth/github" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "github"});");'><span
+                class="icon-sn-github"></span></a>
+    <a href="/user/oauth/weibo" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "weibo"});'><span
+                class="icon-sn-weibo"></span></a>
+    <a href="/user/oauth/qq" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "qq"});'><span
+                class="icon-sn-qq"></span></a>
+    <a href="/user/oauth/weixin" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "qq"});'><span
+                class="icon-sn-weixin"></span></a>
+    <a href="/user/oauth/linkedin" class=""
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "linkedin"});'><span
+                class="icon-sn-linkedin"></span></a>
+    <span id="loginShowMore" style="cursor: pointer" class="mb5"><span class="icon-sn-dotted"></span></span>
+    <a href="/user/oauth/twitter" class=" hidden"
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "twitter"});'><span
+                class="icon-sn-twitter"></span></a>
+    <a href="/user/oauth/facebook" class=" hidden"
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "facebook"});'><span
+                class="icon-sn-facebook"></span></a>
+    <a href="/user/oauth/douban" class=" hidden"
+       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "douban"});'><span
+                class="icon-sn-douban"></span></a>
+</div>
+<div class="form-group clearfix">
+    <a class="btn-block btn btn-default pull-right pl20 pr20 
+                        SFLogin
+             "
+
+            
+        onclick='ga("send", "event", "email login button", "clicked", "login modal");'>
+                    注册新账号
+            </a>
+</div>
+<p class="text-muted text-center mb15">继续即表示你同意<a href="/tos" target="_blank">《服务条款》</a>和<a href="/privacy" target="_blank">《隐私政策》</a></p>        </div>
+    </div>
+</script>
+
+
+<script>
+    window.serverTime = 1572932672000;
+</script>
+
+<script>
+    (function (w) {
+        w.SF = {
+            staticUrl: "https://static.segmentfault.com/v-5db16590"
+        };
+        w.SF.token = (function () {
+    var _Ss65tOW = '7'//'r'
++//'0'
+'9'+//'U'
+'90d'+'d'//'v0'
++'rS'//'rS'
++'V'//'V'
++'3'//'8'
++'d7d'//'H'
++'ad1'//'lm'
++/* 'T'//'T' */''+'5d'//'w'
++//'ic5'
+'448'+''///*'KEZ'*/'KEZ'
++//'d'
+'c'+'0'//'zl'
++''///*'5'*/'5'
++/* '4gr'//'4gr' */''+//'Yqv'
+'388'+''///*'Ki'*/'Ki'
++'a03'//'XTT'
++'5'//'N'
++'a'//'Vlj'
++''///*'p'*/'p'
++//'TD'
+'4b'+'5'//'iDD'
++//'Kxi'
+'Kxi'+//'2mX'
+'b', _l4mDoHh = [[6,8],[6,7],[31,34]];
+
+    for (var i = 0; i < _l4mDoHh.length; i ++) {
+        _Ss65tOW = _Ss65tOW.substring(0, _l4mDoHh[i][0]) + _Ss65tOW.substring(_l4mDoHh[i][1]);
+    }
+
+    return _Ss65tOW;
+})();;
+    })(window);
+
+                var lock = {
+        type: "",
+        text: '',
+        table: {"ban_post":[1,"\u4f60\u5df2\u7ecf\u88ab\u7981\u8a00, \u65e0\u6cd5\u8fdb\u884c\u6b64\u64cd\u4f5c, \u5982\u6709\u7591\u4e49\u8bf7\u63d0\u4ea4\u7533\u8bc9, \u6216\u8005\u53d1\u90ae\u4ef6\u5230pr@segmentfault.com"]}
+    };
+
+        var ddosMode = false;
+    
+        (function (currentUrl) {
+        if (typeof URL != 'undefined') {
+            var baseUrl = new URL('https://segmentfault.com');
+
+            if (baseUrl.protocol != currentUrl.protocol
+                || baseUrl.host != currentUrl.host) {
+                window.location.href = baseUrl.protocol + '//' + baseUrl.host
+                    + currentUrl.pathname + currentUrl.search + currentUrl.hash;
+            }
+        }
+    })(window.location);
+    </script>
+
+             <script crossorigin="" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/assets.js"></script><iframe id="google_osd_static_frame_1714774280583" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/saved_resource(8).html"></iframe>
+                 
+        <script crossorigin="" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/post.min.js"></script>
+            
+
+<script>
+if (!!navigator.userAgent.match(/MicroMessenger/i)) {
+    require.config({
+        paths: { weixin_jsapi: '//res.wx.qq.com/open/js/jweixin-1.2.0' }
+    });
+
+    require(['weixin_jsapi'], function (wx) {
+        var share = {"title":"\u5982\u4f55\u5728 Rails \u4e2d\u642d\u914d Turbolinks \u4f7f\u7528 Vue","desc":"\u5728 .\/app\/javascript\/packs\/ \u4e2d\u5efa\u7acb vue component hello_turbolinks.vue","link":"https:\/\/segmentfault.com\/a\/1190000010580797","imgUrl":"https:\/\/avatar-static.segmentfault.com\/152\/279\/1522794362-59b0a96c9c64f_huge256"};
+        share.title += ' - SegmentFault 思否';
+
+        $.getJSON('/api/util/weixin/jsapi', function (o) {
+            methods = o.data.jsApiList.slice();
+
+            wx.config(o.data);
+            wx.error(console.error);
+            wx.ready(function () {
+                methods.forEach(function (method) {
+                    wx[method](share);
+                });
+            });
+        });
+    });
+}
+</script>
+
+<script src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/ads.min.js" type="text/javascript"></script><div id="UGTKzPZbRoOS" style="display: none;"></div>
+
+<script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-918487-8']);
+    _gaq.push(['_trackPageview']);
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+                
+        
+
+                
+
+    ga('create', 'UA-918487-8', 'auto', {
+        'userID'
+    : 0,
+        'createdTime'
+    : 0,
+        'now'
+    : 1572932672,
+        'allowLinker'
+    : true });
+    ga('require', 'linker');
+    ga('linker:autoLink', ['docs.segmentfault.com'] );
+    ga('set', 'dimension1', 'guest');
+    ga('send', 'pageview');
+
+        if(document.getElementById('UGTKzPZbRoOS')){
+        UGTKzPZbRoOS='No';
+    } else {
+        UGTKzPZbRoOS='Yes';
+    }
+
+    if(typeof ga !=='undefined'){
+        ga('send','event','Blocking Ads',UGTKzPZbRoOS,{'nonInteraction':1});
+    } else if(typeof _gaq !=='undefined'){
+        _gaq.push(['_trackEvent','Blocking Ads',UGTKzPZbRoOS,undefined,undefined,true]);
+    }
+
+</script>
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?e23800c454aa573c0ccb16b52665ac26";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+<iframe id="p_analyse_iframe" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/saved_resource(9).html" style="display: none;"></iframe><div id="bindPhoneModal" style="display: none">
+    <div class="bg-white bindphone-model">
+        <div class="alert alert-warning" role="alert">
+            为了保证账号安全，请先绑定手机
+        </div>
+        <div>
+            <form class="form-horizontal form__bindphone-apply" style="background-color:#fff;padding:0;">
+                <div class="form-group ">
+                    <label for="phoneNumber" class="col-sm-3 control-label required">手机号码test</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control bindphone--phone" id="phoneNumber" name="phone" placeholder="仅只支持大陆手机号">
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+                <div class="form-group">
+                    <label for="authCode" class="col-sm-3 control-label required">验证码</label>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control bindphone--code" name="code" placeholder="短信验证码">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default user-bind__phone-vaild-btn" type="button">获取验证码</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div><div id="atwho-container"><div id="atwho-ground-3f019ca21572932676664"><div class="atwho-view" id="at-view-64"><ul class="atwho-view-ul"></ul></div></div></div></body><iframe id="google_esf" name="google_esf" src="./如何在 Rails 中搭配 Turbolinks 使用 Vue - Ruby on Rails 學習筆記 - SegmentFault 思否_files/zrt_lookup.html" data-ad-client="ca-pub-6330872677300335" style="display: none;"></iframe></html>
