@@ -1,0 +1,34 @@
+使用框架前端vue+axios+iview
+       后端ruby+rails+grape
+
+1.创建指定版本rails项目，$rails new
+  加入git版本控制
+2.使用脚手架添加user模型，$rails g scaffold User username:string password:string
+  运行数据迁移创建数据库，$rails db:migrate
+  修改根目录   root 'users#index'
+3.添加vue
+
+
+3.model中添加数据验证
+vue跨组件传值store,路由配置，懒加载
+（1）在asset/js文件夹中，添加vue页面和js文件
+注：js中引入vue.esm.js  ，注册组件
+(2)在application的head引入js
+(3)在.erb页面载入组件，关键字data-vue-components-outlet
+
+
+问题：
+(1)vscode不能代码格式化
+(2)缺少前后端校验
+(3)拦截器(路由拦截)：令牌tocken的随机生成
+(4)冗余代码提取出来:利用组件继承，子父模板
+(5)注册是用户名唯一验证
+(6 X)postman的使用  
+(7)grape挂载是什么
+
+注意:
+(1)vue路由<router-link to="/">,页面渲染<router-view />
+(2)axios（类似ajaxs）:先安装npm install axios;再import
+(3)跨域访问：在api中加上header配置的代码
+(4)前端校验使用iview，后端简单校验在grape中定义params
+

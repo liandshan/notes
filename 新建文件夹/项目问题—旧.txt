@@ -1,0 +1,14 @@
+$rvm list ( 或 $ rvm gemset list)    查看ruby版本  
+$rvm use ruby-1.8.7-p374             切换ruby版本 
+（或$ rvm use 2.3.4 --default）
+
+【旧项目】
+1.rvm确定ruby版本：1.8.7(新价格网2.6.3)
+2.确保本地安装nginx,查看nginx配置：
+$sudo gedit /etc/nginx/sites-enabled/default
+3.以nginx配置的端口启动：$ruby script/server -p3000
+（启动console的命令，$ruby script/console）
+访问http://local-price.rccchina.com/
+
+【新api】
+问题：链接云测数据库，查看数据

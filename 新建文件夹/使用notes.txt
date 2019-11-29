@@ -1,0 +1,18 @@
+【linux系统快捷键】
+1.调节亮度Fn+F11/F12
+
+【deepin快捷键】
+1.截图快捷键ctrl+alt+a
+
+【chrome】
+1.清空缓存ctrl + shift + delete
+
+【VSCode】
+0.首选项 - 键盘快捷方式：修改‘触发建议’快捷键为Alt+/
+1.创建代码模板：文件 > 首选项 > 用户代码片段,搜索，修改对应json文件
+2.ctrl+shift+P，输入git，会看到VS CODE支持的所有git命令。
+3.搜索ctrl+p可以弹出一个小窗,在上面的输入框输入文件名
+
+
+【linux常用命令】
+(1)ll  查看详情 ls -al

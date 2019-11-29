@@ -1,0 +1,58 @@
+$rails c错误:过程解决key$ bc787c99d4c16a71933d388e88875cf7
+【环境搭建】
+1.$rvm list                 查看ruby版本   或 $ rvm gemset list  
+  $rvm use ruby-1.8.7-p374  切换ruby版本  （或$ rvm use 2.3.4 --default）
+  $gem environment         查看gemset版本
+  $gem list d#列出本地以d打头的包
+【项目执行】
+旧价格网：
+【查询占用端口】
+$ netstat -anp|grep 7002
+$ kill -9 27661
+
+
+127.0.0.1	localhost
+127.0.1.1   shanshan-PC
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+127.0.0.1 local-price.rccchina.com
+172.16.0.40 price-redis cloud-service 
+
+
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root /var/www/html;
+
+	server_name local-price.rccchina.com;
+
+	location / {
+                proxy_pass http://127.0.0.1:3000/;
+		#try_files $uri $uri/ =404;
+	}
+}
+【项目登录】
+云测密码：it_test123,本地密码：reach123
+master分支会发布到线上
+dev/*会发布到 dev测试环境
+test/*会发布到test测试环境，请各位开发人员知悉！
+【rails查询接口】
+first,last,count
+.find()
+.save保存数据库
+【git命令】
+$git checkout 分支名           可以直接拉取远程分支，并本地建立同名新分支
+$ git branch -r               查看远程分支
+$ git branch -d 分支名         删除分支
+$ git branch -m 旧名  新名     分支重命名
+ git branch --set-upstream-to=origin/shanshan/NP-219  设置远端拉取代码的分支
+$git reflog                  查看所有分支的所有操作记录
+
+1.checkout且分支

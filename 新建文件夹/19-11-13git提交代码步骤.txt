@@ -1,0 +1,29 @@
+1.克隆代码$git clone 链接
+2.pull一下$git pull
+3.创建分支  $git checkout  查看当前分支
+           $git checkout -b shanshan/task名字
+【注意：不提交config里的文件】
+4-1.修改代码，
+    add添加
+    commit
+    推送至gitlab上与自己同名的分支$git push  出错
+   （$ git push --set-upstream origin shanshan/NP-204）
+4-2创建dev分支$ git checkout -b dev/tatsk名字
+        打包 $ yarn run stage
+        add添加
+        commit  
+        推送到dev分支上
+4-3在gitlab上，切换到远程4-1分支上,merge给Ethan
+【若修改代码：
+  需在4-1分支上修改，然后推送
+  再合并到4-2分支上，打包，推送】
+
+11/13日常清单：表格尺寸调整task
+             git推送流程
+             vscode上gitlens图形界面推送代码，切换分支
+             看板小纸条
+11/14日常清单：页面style覆盖表格样式没用：style设为局部样式scoped
+             去掉scoped有些样式仍然不起作用，可以将样式写在assets/css/main.css,覆盖成功。
+安装旧价格网环境
+11/15日常清单：jira的Backlog查看sprint
+安装旧价格网环境

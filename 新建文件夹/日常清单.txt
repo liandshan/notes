@@ -1,0 +1,19 @@
+完成
+1.postman使用
+
+gem install ruby-oci8
+/usr/local/instantclient_19_3
+
+
+export ORACLE_HOME="/usr/local/instantclient_19_3" 
+export LD_LIBRARY_PATH=$ORACLE_HOME 
+
+sudo ln -s libclntsh.so.19.1 libclntsh.so
+sudo ln -s libocci.so.19.1 libocci.so
+
+export ORACLE_HOME=/opt/oracle/instantclient_19_3
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/oracle/instantclient_19_3
+export PATH=$PATH:/opt/oracle/instantclient_19_3
+export TNS_ADMIN=$ORACLE_HOME
+export NLS_LANG="AMERICAN_AMERICA.UTF8"
+export LD_LIBRARY_PATH='/usr/local/instantclient_19_3'

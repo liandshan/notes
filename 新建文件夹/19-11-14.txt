@@ -1,0 +1,29 @@
+用户登录涉及session,cookie
+How To Think Like a Computer Scientist
+
+旧价格网
+1.reg_rdh =~ send_datas
+2.gsub
+
+
+$ netstat -anp|grep 端口号
+$kill -9 pid        杀死进程
+
+$ git pull origin master
+
+
+gem install rails -v2.3.11;gem install rails -v2.3.8;gem install rails -v2.3.5;gem install rails -v2.1.1;     （ruby-1.8.7完）
+gem install bundler -v3.1.4;（失败）
+gem install fastthread -v1.0.7;  （ruby-1.8.7完）
+gem install json -v1.8.1;     （ruby-1.8.7完）
+gem install rack -v1.5.2 -v1.1.6 -v1.0.1;  (完)
+gem install sunspot_rails -v1.2.1 —ignore-denpendencies;
+gem install rdoc -v 3.10;    （ruby-1.8.7完）（成功了，自动安装1.8.6）
+gem install SystemTimer -v 1.2.3;  （ruby-1.8.7完）
+步骤3，  (安装mysql)
+4依赖包
+
+
+19/11/20
+批页面不能直接更改已发布询价产品信息:人工询价批页面的产品信息模块
+人工询价批页面产品信息会修改,询价页面产品信息同步修改

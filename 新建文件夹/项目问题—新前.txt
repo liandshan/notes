@@ -1,0 +1,75 @@
+1.@keydown.enter.native="handleSubmit"
+2.slot="prepend"
+3....mapActions
+4.路由里的meta
+5.const
+6._c/fence   
+（x）答：_c别名，在vue.config.js中配置
+7.预览手册跳转慧讯网，跟路由不匹配
+8.render: (h, params)中h
+9.vue怎么引入css文件
+
+blur失焦触发trigger
+
+
+前端：
+Form表单
+Menu菜单
+卡片Card
+Modal 对话框（弹窗）：
+    //success,warning,error,info
+    //  this.$Message.error("请选择产品手册");
+Page分页
+Spin 加载中
+Grid 栅格：Row和Col,共24格
+Table 表格
+Tag标签与Tree 树形控件
+DatePicker 日期选择器 （shortcuts快捷键）
+InputNumber 数字输入框
+Icon 图标
+Alert 警告提示
+Poptip 气泡提示
+components,methods,computed,props,watch,data
+
+【自己封装的组件】：
+StatusSelect——Select 选择器
+RccDateRanger——DatePicker 日期选择器
+【自己封装的js——utils文件下】
+
+
+PcaSelector——省市区选择器（要看，联动）
+【组件知识】：
+props:可作为属性直接使用
+
+
+重点：
+node组件定义及循环显示
+批量更新及删除
+编辑和添加可以公用一个页面
+
+思考：
+1.想把页面公用class样式抽出来：header—body中头部链接，query,check-复选框,
+  js功能抽出来：收起展开
+2.  moutend()和 computed及watch的应用
+【页面】
+产品手册：Form表单与Col
+信息详情页：CheckboxGroup与Checkbox，RadioGroup与Radio
+eidtor上红色※：是form表单校验的必填规则
+【注意】
+input的width写在style中
+style="display:inline-block;"可以与别的标签内元素自动换行
+templete标签没有样式
+v-if控制标签的显示与隐藏；display控制隐藏
+select标签默认值：在绑定的data中设置且必须在选项中存在！
+【待学】Vue.set与Vue.delete
+      JS中的DOM节点相关（dom节点类型判断）
+      mounted与watch
+      ！！表示什么，（文件CategorySelector）
+ StatusSelect自己封装组件怎么传值的（class_name，enum_name，
+brow-information页面）
+浏览器逐步刷新调试
+【审批界面问题】
+分期选择框，日期
+提示语div背景包在了最外层div
+class中子选择器
+(已解决：添加div分区怎么能不自动换行，eidtor上红色※)

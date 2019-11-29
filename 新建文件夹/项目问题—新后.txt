@@ -1,0 +1,33 @@
+1.grape的
+mount挂载
+helpers
+rescue_from
+use
+2.namespace
+3.省市区级联查询前后端
+
+语句：
+Province.all_provinces.select('id,name_cn').map{|x| {id:x.id,title: x.name_cn}}
+
+【model关键字：】
+order
+includes
+run,merge,result
+attribute
+定义：
+enum
+it单元测试
+
+信息价
+# [['待审核', 1], ['审核未通过', 2], ['已发布', 3], ['草稿', 5], ['审核通过', 4], ['待读取', 15], ['改错中', 6], ['已递交', 7],['文件格式错误', 51], ['数据错误', 52]]
+
+【oracle】
+DECODE(value,if1,then1,if2,then2,if3,then3,...,else)
+
+【控制台查询数据库】:pg,oracle
+$rails c
+>Ora::InformationFile.connection  链接
+>Ora::InformationFile  查询模型
+>Ora::InformationFile.last  最后一条数据
+
+Ora::InformationFile(id: integer, file_name: string, old_name: string, province_id: integer, city_id: integer, year: string, month: string, upload_by: integer, upload_at: datestamptz, status: integer, verify_by: integer, verify_at: datestamptz, notes: string, created_at: datestamptz, updated_at: datestamptz, upload_type: integer, icc_user_type: integer, season: integer, back_reason: string, version: integer, last: integer, is_indexed: integer, checked_by: integer, checked_at: datestamptz, hard_type_id: integer, edm_id: integer, sub_user_id: integer, area_id: integer, remark: string, has_rebacked: integer, emp_remark: string, back_type: integer) 
